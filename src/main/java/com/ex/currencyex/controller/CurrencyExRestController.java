@@ -21,7 +21,9 @@ public class CurrencyExRestController {
     //국가에 따른 환율을 가져오는 메소드
     @GetMapping("/exchange-rates")
     public ResponseEntity getExchangeRate(@RequestParam(name = "receiveCountry") String receiveCountry){
+        System.out.println("1.receiveCountry = " + receiveCountry);
         Double exchangeRate = currencyConverter.getCurrencyRate(receiveCountry);
+        System.out.println("exchangeRate = " + exchangeRate);
         return new ResponseEntity(format(exchangeRate), HttpStatus.OK);
     }
 
