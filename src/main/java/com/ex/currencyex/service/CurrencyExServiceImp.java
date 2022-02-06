@@ -49,9 +49,6 @@ public class CurrencyExServiceImp implements CurrencyExService{
     public CurrencyDto getCurrency(){
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
-        System.out.println("CurrencyDto get 호출");
         try{
             System.out.println("try 들어옴");
             URL getUrl =  new URL(url +"access_key=" + accessKey + "&source=" + source + "&currencies=" + currencies);
@@ -69,32 +66,14 @@ public class CurrencyExServiceImp implements CurrencyExService{
                 outResult.append(inputLine);
             }
             conn.disconnect();
-            System.out.println("REST API End");
-            System.out.println("outResult.toString() = " + outResult.toString());
             String jsonObject = outResult.toString();
-//            String getUrl = url +"access_key=" + accessKey + "&source=" + source + "&currencies=" + currencies;
             currency = mapper.readValue(jsonObject, CurrencyDto.class);
 
-//            currency = restTemplate.exchange()
-            System.out.println("currency 1= " + currency);
         }catch (IOException e){
             e.printStackTrace();
-            System.out.println("Exception");
         }
-        System.out.println("currency 2= " + currency);
         return currency;
     }
-
-    /*@Override
-    public CurrencyDto getCurrency() {
-             if(ischeck()) {}
-        currency = restTemplate.getForObject(
-                        url + "access_key=" + accessKey
-                                + "&source=" + source
-                                + "&currencies=" + currencies,
-                        CurrencyDto.class);
-        return currency;
-    }*/
 
     //현재 시간과 API를 통해 호출한 timestamp의 차이가
     //application.properties에 저장해 놓은 주기 시간보다 크면 API를 호출하도록 하는 메소드

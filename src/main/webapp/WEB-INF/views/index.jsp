@@ -62,6 +62,10 @@
     var amount = $('#send_amount').val();
     return (amount.length <= 0 || amount < 0 || amount > 10000);
   }
+  function dftCheck(){
+    var receive_country = $('#receive_country').val();
+    return (receive_country == "dft");
+  }
 
   function getSendAmount(){
     var receivingCountry = $('#receive_country').val();
@@ -71,7 +75,11 @@
       "sendAmount" : sendAmount
     }
     if (validCheck()) {
-      $('#receiveResult').html("<div class=\"alert alert-danger\"><p>송금액이 바르지 않습니다.송금액은 0 ~ 10000 사이의 수를 입력하세요</p></div>");
+      $('#receiveResult').html("<div class=\"alert alert-danger\" style='color: red'><p>송금액이 바르지 않습니다.송금액은 0 ~ 10000 사이의 수를 입력하세요.</p></div>");
+      return;
+    }
+    if(dftCheck()){
+      $('#receiveResult').html("<div class=\"alert alert-danger\" style='color: red'><p>수취 국가를 선택해 주세요.</p></div>");
       return;
     }
     var jsonData = JSON.stringify(inputData);

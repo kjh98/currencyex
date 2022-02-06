@@ -7,6 +7,5 @@ import lombok.Setter;
 @Setter
 public class ConvertInfoDto {
     private String receiveCountry;
-
     private double sendAmount;
 }
