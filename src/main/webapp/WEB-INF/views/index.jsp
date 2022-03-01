@@ -98,6 +98,7 @@
           alert("잘못 입력된 값 입니다.")
         }else if(err.status === 500){
           alert("서버에 문제가 발생했습니다.")
+          console.log("TEST");
         }
       }
     })
